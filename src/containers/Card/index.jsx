@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import dadosApi from "../context/DadosApi"
 
 
-export default function Card() {
+export default function Card(props) {
     const { dadosClima } = useContext(dadosApi);
     console.log(dadosClima);
 
@@ -20,7 +20,7 @@ export default function Card() {
 
     setTimeout(()=>{
         setCity(dadosClima.name)
-        setPais(dadosClima.sys.country)
+        setPais(`https://flagcdn.com/16x12/${(dadosClima.sys.country).toLowerCase()}.png`)
         setImgClima(dadosClima.weather[0].icon)
         setClima(dadosClima.weather[0].description)
         setTemp(parseInt(dadosClima.main.temp))
@@ -33,17 +33,16 @@ export default function Card() {
     },150)
 
     return (
-        <section className="bg-white w-80 p-2 flex flex-col gap-2 rounded-xl">
+        <section className="card bg-white w-56 h-[300px] p-2 flex flex-col gap-5 rounded-xl">
             <div className="logo flex flex-col items-center">
-                <img src="" alt={pais} className="bg-black h-10 w-10 "/>
+                <img src={pais} alt="" className="w-6"/>
                 <p>{city}</p>
             </div>
-            <div className="flex justify-center gap-4">
-                <div>
-                    <img src="" alt={imgClima} className="bg-black h-40 w-40"/>
-                    <h1>{clima}</h1>
+            <div className="flex justify-center">
+                <div className="w-2/5">
+                    <img src={`../src/imagens/${imgClima}.png`} alt={clima} className=""/>
                 </div>
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-center w-3/5">
                     <div>
                         <h2 className="text-3xl font-semibold">{temp}</h2>
                     </div>
@@ -51,20 +50,20 @@ export default function Card() {
                         <h3 className="">{tempMin}</h3>
                         <p>/</p>
                         <h3 className="">{tempMax}</h3>
-                    </div>
+                    </div><h1>{clima}</h1>
                 </div>
             </div>
-            <article>
+            <article className="flex flex-col gap-3">
                 <div className="flex justify-between">
                     <p>Censação: <span>{censacao}</span></p>
                     <p>Umidade: <span>{umidade}</span></p>
                 </div>
                 <div className="flex justify-between">
-                    <p>Velocidade: <span>{veloVento}</span>/km</p>
+                    <abbr title="Velocidade do vento"><img src="../src/imagens/vento.png" alt="" /> <span>{veloVento}</span>/km</abbr>
                     <p>Direção: <span>{dereVento}</span></p>
                 </div>
-                <button className="underline mt-2">Mais informações</button>
             </article>
+            <button className="underline text-left" onClick={props.click}>Mais informações</button>
         </section>
     )
 }
