@@ -1,4 +1,8 @@
-import umidade from "../../../assets/umidade.png"
+import umidade from "../../../src/imagens/umidade.png"
+import vento from "../../../src/imagens/vento.png"
+import nascerSol from "../../../src/imagens/alvorecer.png"
+import porSol from "../../../src/imagens/por-do-sol.png"
+import direcao from "../../../src/imagens/direcao.png"
 
 export default function CardEstendido (props) {
     return (
@@ -38,13 +42,13 @@ export default function CardEstendido (props) {
                         <abbr title="umidade">{props.climaAPI.umidade}%<img src={umidade} alt="" /></abbr>
                     </div>
                     <div className="flex justify-between">
-                        <div className="flex gap-1"><img src="../src/imagens/vento.png" alt="" /><p>{props.climaAPI.veloVento}Km/h</p></div>
-                        <p style={{transform: `rotateZ(${Number(props.climaAPI.dereVento)}deg)`}}><img src="../src/imagens/direcao.png" alt="Direção do vento" /></p>
+                        <div className="flex gap-1"><img src={vento} alt="" /><p>{props.climaAPI.veloVento}Km/h</p></div>
+                        <p style={{transform: `rotateZ(${Number(props.climaAPI.dereVento)}deg)`}}><img src={direcao} alt="Direção do vento" /></p>
                     </div>
                     <div className="flex justify-between">
-                        <div className="flex"><img src="../src/imagens/alvorecer.png" alt="" /> {props.climaAPI.nascerSol}</div>
+                        <div className="flex"><img src={nascerSol} alt="" /> {props.climaAPI.nascerSol}</div>
                         <div className="flex">
-                            <div className="flex">{props.climaAPI.PorSol}<img src="./src/imagens/por-do-sol.png" alt="" /></div>
+                            <div className="flex">{props.climaAPI.PorSol}<img src={porSol} alt="" /></div>
                         </div>
                     </div>
                     <a href="https://openweathermap.org/" target="_blank" className="text-end underline text-gray-400">fonte: Openweather</a>
