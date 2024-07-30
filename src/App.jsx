@@ -16,7 +16,7 @@ export function App() {
   const [ pais , setPais ] = useState('')
   const [ temp , setTemp ] = useState('')
   const [ clima , setClima ] = useState('')
-  const [ imgClima , setImgClima ] = useState('')
+  const [ imgClima , setImgClima ] = useState("")
   const [ tempMax , setTempMax ] = useState('')
   const [ tempMin , setTempMin ] = useState('')
   const [ censacao , setCensacao ] = useState('')
@@ -39,21 +39,21 @@ export function App() {
     let porHoras = porSol.getHours()
     let porNimutos = porSol.getMinutes()
 
-    let clima = dadosClima.weather[0].icon
+    setImgClima(dadosClima.weather[0].icon)
 
-    if (clima == "03n" || clima == "03d" || clima == "04d" || clima == "04n") {
-        setImgClima("02d") //nublado
-    } else if (clima == "09d" || clima == "09n" || clima == "10d" || clima == "10n") {
-        setImgClima("10d") // chuva
-    } else if (clima == "11d") {
-        setImgClima("11n") //chuva com trovoadas
-    } else if ( clima == "13n") {
-        setImgClima("13d") //neve
-    } else if ( clima == "50n") {
-        setImgClima("50d") //nevoa
-    } else {
-        setImgClima(clima)
-    }
+    // if (clima == "03n" || clima == "03d" || clima == "04d" || clima == "04n") {
+    //     setImgClima("02d") //nublado
+    // } else if (clima == "09d" || clima == "09n" || clima == "10d" || clima == "10n") {
+    //     setImgClima("10d") // chuva
+    // } else if (clima == "11d") {
+    //     setImgClima("11n") //chuva com trovoadas
+    // } else if ( clima == "13n") {
+    //     setImgClima("13d") //neve
+    // } else if ( clima == "50n") {
+    //     setImgClima("50d") //nevoa
+    // } else {
+    //     setImgClima(clima)
+    // }
 
     setCity(dadosClima.name)
       setPais(`https://flagcdn.com/16x12/${(dadosClima.sys.country).toLowerCase()}.png`)
@@ -131,8 +131,8 @@ export function App() {
           </Cabecalho>
         </CityApi.Provider>
         <main className="flex justify-center items-center">
-          {((!dadosClima == "")?<Card click={estenderCard} climaAPI={{city, pais, imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , censacao ,nascerSol , PorSol}}/>:'')}
-          {((!dadosClima == "")?<CardEstendido click={minimizarCard} climaAPI={{city, pais, imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , censacao ,nascerSol , PorSol}}/>:'')}
+          {((!dadosClima == "")?<Card click={estenderCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , censacao ,nascerSol , PorSol}}/>:'')}
+          {((!dadosClima == "")?<CardEstendido click={minimizarCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , censacao ,nascerSol , PorSol}}/>:'')}
         </main>
     </>
   )
