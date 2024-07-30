@@ -42,7 +42,7 @@ export function App() {
     let clima = dadosClima.weather[0].icon
 
     if (clima == "03n" || clima == "03d" || clima == "04d" || clima == "04n") {
-        setImgClima("../src/imagens/02d.png") //nublado
+        setImgClima("02d") //nublado
     } else if (clima == "09d" || clima == "09n" || clima == "10d" || clima == "10n") {
         setImgClima("10d") // chuva
     } else if (clima == "11d") {
