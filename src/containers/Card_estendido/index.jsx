@@ -1,5 +1,4 @@
 
-
 export default function CardEstendido (props) {
     return (
         <section className="card_estendido relative card_estendi bg-white p-2 rounded-xl flex gap-4 hidden w-56 h-[300px] overflow-hidden">
@@ -35,7 +34,7 @@ export default function CardEstendido (props) {
                     </div> */}
                     <div className="flex justify-between">
                         <p>Censação: {props.climaAPI.censacao}</p>
-                        <abbr title="umidade">{props.climaAPI.umidade}%<img src="./umidade.png" alt="" /></abbr>
+                        <abbr title="umidade">{props.climaAPI.umidade}%<img src="./assets/umidade.png" alt="" /></abbr>
                     </div>
                     <div className="flex justify-between">
                         <div className="flex gap-1"><img src="../src/imagens/vento.png" alt="" /><p>{props.climaAPI.veloVento}Km/h</p></div>
