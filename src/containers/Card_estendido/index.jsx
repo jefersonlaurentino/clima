@@ -8,7 +8,7 @@ export default function CardEstendido (props) {
                         <h2>{props.climaAPI.city}</h2>
                         <img src={props.climaAPI.pais} alt="" className="w-6" />
                     </div>
-                    <img src={`../src/imagens/${props.climaAPI.imgClima}.png`} alt="" className="w-48"/>
+                    <img src={props.climaAPI.imgClima} alt="" className="w-48"/>
                     <p className="font-semibold">{props.climaAPI.clima}</p>
                     <h3 className="font-semibold text-3xl">{props.climaAPI.temp}</h3>
                     <div className="flex gap-1 text-2xl">
@@ -37,7 +37,7 @@ export default function CardEstendido (props) {
                         <abbr title="umidade">{props.climaAPI.umidade}%<img src="./assets/umidade.png" alt="" /></abbr>
                     </div>
                     <div className="flex justify-between">
-                        <div className="flex gap-1"><img src="../src/imagens/vento.png" alt="" /><p>{props.climaAPI.veloVento}Km/h</p></div>
+                        <div className="flex gap-1"><img src={props.climaAPI.imgClima} alt="" /><p>{props.climaAPI.veloVento}Km/h</p></div>
                         <p style={{transform: `rotateZ(${Number(props.climaAPI.dereVento)}deg)`}}><img src="../src/imagens/direcao.png" alt="Direção do vento" /></p>
                     </div>
                     <div className="flex justify-between">
