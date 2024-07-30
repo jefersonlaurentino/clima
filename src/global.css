@@ -94,19 +94,3 @@ abbr {
         transform: rotateY(90deg);
     }
 }
-
-@media (max-width: 520px) {
-    .info {
-        animation: teste linear .5s;
-    }
-    
-    @keyframes teste {
-        0% {
-            width: 286px;
-        }
-        100% {
-            background-color: brown;
-            width: 500px;
-        }
-    }
-}
