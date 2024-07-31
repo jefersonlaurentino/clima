@@ -3,6 +3,7 @@ import Cabecalho from "./containers/cabecalho"
 import { FaSearch } from "react-icons/fa";
 import Card from "./containers/Card";
 import CardEstendido from "./containers/Card_estendido";
+import CardSemana from "./containers/Card_semana";
 import CityApi from "./containers/context/CityApi"
 import { useEffect, useState } from "react";
 
@@ -25,8 +26,6 @@ export function App() {
   const [ dereVento , setDereVento ] = useState('')
   const [ lon , setLon ] = useState('')
   const [ lat , setLat ] = useState('')
-  const [ chuvaDe1h , setChuvaDe1h ] = useState('')
-  const [ chuvaDe3h , setChuvaDe3h ] = useState('')
   const [ nascerSol , setNascerSol ] = useState('')
   const [ PorSol , setPorSol ] = useState('')
   
@@ -40,35 +39,20 @@ export function App() {
     let porNimutos = porSol.getMinutes()
 
     setImgClima(dadosClima.weather[0].icon)
-
-    // if (clima == "03n" || clima == "03d" || clima == "04d" || clima == "04n") {
-    //     setImgClima("02d") //nublado
-    // } else if (clima == "09d" || clima == "09n" || clima == "10d" || clima == "10n") {
-    //     setImgClima("10d") // chuva
-    // } else if (clima == "11d") {
-    //     setImgClima("11n") //chuva com trovoadas
-    // } else if ( clima == "13n") {
-    //     setImgClima("13d") //neve
-    // } else if ( clima == "50n") {
-    //     setImgClima("50d") //nevoa
-    // } else {
-    //     setImgClima(clima)
-    // }
-
     setCity(dadosClima.name)
-      setPais(`https://flagcdn.com/16x12/${(dadosClima.sys.country).toLowerCase()}.png`)
-      setClima(dadosClima.weather[0].description)
-      setTemp(parseInt(dadosClima.main.temp))
-      setTempMax(parseInt(dadosClima.main.temp_max))
-      setTempMin(parseInt(dadosClima.main.temp_min))
-      setCensacao(parseInt(dadosClima.main.feels_like))
-      setUmidade(dadosClima.main.humidity)
-      setVeloVento(parseInt(dadosClima.wind.speed * 3.6))
-      setDereVento(dadosClima.wind.deg)
-      setLon(dadosClima.coord.lon)
-      setLat(dadosClima.coord.lat)
-      setNascerSol((`${(nascerHoras < 10) ? "0"+nascerHoras: nascerHoras}:${(nascerNimutos < 10) ? "0"+nascerNimutos : nascerNimutos}`))
-      setPorSol((`${(porHoras < 10) ? "0"+porHoras: porHoras}:${(porNimutos < 10) ? "0"+porNimutos : porNimutos}`))
+    setPais(`https://flagcdn.com/16x12/${(dadosClima.sys.country).toLowerCase()}.png`)
+    setClima(dadosClima.weather[0].description)
+    setTemp(parseInt(dadosClima.main.temp))
+    setTempMax(parseInt(dadosClima.main.temp_max))
+    setTempMin(parseInt(dadosClima.main.temp_min))
+    setCensacao(parseInt(dadosClima.main.feels_like))
+    setUmidade(dadosClima.main.humidity)
+    setVeloVento(parseInt(dadosClima.wind.speed * 3.6))
+    setDereVento(dadosClima.wind.deg)
+    setLon(dadosClima.coord.lon)
+    setLat(dadosClima.coord.lat)
+    setNascerSol((`${(nascerHoras < 10) ? "0"+nascerHoras: nascerHoras}:${(nascerNimutos < 10) ? "0"+nascerNimutos : nascerNimutos}`))
+    setPorSol((`${(porHoras < 10) ? "0"+porHoras: porHoras}:${(porNimutos < 10) ? "0"+porNimutos : porNimutos}`))
   },350)
 
   const api = async()=>{
@@ -130,9 +114,17 @@ export function App() {
             <FaSearch />
           </Cabecalho>
         </CityApi.Provider>
-        <main className="flex justify-center items-center">
-          {((!dadosClima == "")?<Card click={estenderCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , censacao ,nascerSol , PorSol}}/>:'')}
-          {((!dadosClima == "")?<CardEstendido click={minimizarCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , censacao ,nascerSol , PorSol}}/>:'')}
+        <main>
+          <section className="flex justify-center items-center">
+            {((!dadosClima == "")?<Card click={estenderCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , censacao ,nascerSol , PorSol}}/>:'')}
+            {((!dadosClima == "")?<CardEstendido click={minimizarCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , censacao ,nascerSol , PorSol}}/>:'')}
+          </section>
+          <section className="mt-5">
+            <h2 className="m-3">Proximas Semanas</h2>
+            <div className="w-full overflow-y-hidden flex gap-3 px-2">
+              <CardSemana climaAPI={{imgClima , temp , tempMax , tempMin }}/>
+            </div>
+          </section>
         </main>
     </>
   )

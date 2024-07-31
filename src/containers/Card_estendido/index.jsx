@@ -18,7 +18,6 @@ export default function CardEstendido (props) {
 
     const clima = props.climaAPI.imgClima
     const [ imgClima , setImgClima ] = useState("")
-    console.log(clima);
 
     setTimeout(()=>{
         if (clima == "03n" || clima == "03d" || clima == "04d" || clima == "04n") {
