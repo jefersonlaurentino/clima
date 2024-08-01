@@ -5,7 +5,7 @@ import nublado from "../../../src/imagens/02n.png"
 import chuva from "../../../src/imagens/10d.png"
 import chuvaForte from "../../../src/imagens/11n.png"
 import neve from "../../imagens/13d.png"
-// import nevoa from "../../imagens/50n.png"
+import nevoa from "../../imagens/02n.png"
 import lua from "../../../src/imagens/01n.png"
 import sol from "../../../src/imagens/01d.png"
 import solNuves from "../../../src/imagens/02d.png"
@@ -15,7 +15,6 @@ import { useState } from "react"
 export default function Card(props) {
     const clima = props.climaAPI.imgClima
     const [ imgClima , setImgClima ] = useState("")
-    console.log(clima);
 
     setTimeout(()=>{
         if (clima == "03n" || clima == "03d" || clima == "04d" || clima == "04n") {

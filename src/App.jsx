@@ -28,6 +28,8 @@ export function App() {
   const [ lat , setLat ] = useState('')
   const [ nascerSol , setNascerSol ] = useState('')
   const [ PorSol , setPorSol ] = useState('')
+  const arraySemana = [ "domingo" , "segunda" , "terça" , "quarta" , "quinta" , "sexta" , "sabado" ]
+  const [ semana , setSemana ] = useState([])
   
   setTimeout(()=>{
     let NascerSol = new Date(Number(dadosClima.sys.sunrise * 1000))
@@ -69,6 +71,14 @@ export function App() {
 
   useEffect(()=>{
     consumirAPI()
+    let diaDaSemana = new Date().getDay()
+    let array = []
+    let diaPos =  []
+    let diaAnt= []
+    arraySemana.forEach((e)=>(arraySemana.indexOf(e) > diaDaSemana)? diaPos.push(e): diaAnt.push(e))
+    diaPos.forEach((e)=>array.push(e))
+    diaAnt.forEach((e)=>array.push(e))
+    setSemana(array)
   },[cityApi])
 
   const estenderCard = () => {
@@ -107,25 +117,27 @@ export function App() {
     },1000) 
   }
 
+  console.log(semana);
+
   return (
     <> 
         <CityApi.Provider value={{ cityApi , setCityApi }}>
           <Cabecalho>
             <FaSearch />
           </Cabecalho>
-        </CityApi.Provider>
         <main>
           <section className="flex justify-center items-center">
-            {((!dadosClima == "")?<Card click={estenderCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , censacao ,nascerSol , PorSol}}/>:'')}
+            {((!dadosClima == "")?<Card click={estenderCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , censacao ,nascerSol , PorSol }}/>:'')}
             {((!dadosClima == "")?<CardEstendido click={minimizarCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , censacao ,nascerSol , PorSol}}/>:'')}
           </section>
-          <section className="mt-5">
+          <section className="mt-5 m-auto max-w-5xl">
             <h2 className="m-3">Proximas Semanas</h2>
-            <div className="w-full overflow-y-hidden flex gap-3 px-2">
-              <CardSemana climaAPI={{imgClima , temp , tempMax , tempMin }}/>
+            <div className="flex justify-around gap-2 px-2 overflow-y-hidden">
+              {semana.map((dia)=><CardSemana climaAPI={{imgClima , temp , tempMax , tempMin , dia}}/>)}
             </div>
           </section>
         </main>
+        </CityApi.Provider>
     </>
   )
 }

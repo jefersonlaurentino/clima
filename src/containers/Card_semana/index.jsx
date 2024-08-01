@@ -7,27 +7,26 @@ import lua from "../../../src/imagens/01n.png"
 import sol from "../../../src/imagens/01d.png"
 import solNuves from "../../../src/imagens/02d.png"
 import luaNuves from "../../../src/imagens/02n.png"
-import cityApi from "../context/CityApi"
-import { useEffect, useState } from "react"
+import cityAPI from "../context/CityApi"
+import { useContext, useEffect, useState } from "react"
 
 export default function CardSemana(props){
     // função para mudar as imagens do clima sem a Api
-    const [ city ] = useState(cityApi)
+    const { cityApi } = useContext(cityAPI)
     const [ imgClima , setImgClima ] = useState("")
-    let clima = ""
-
+    const [ clima , setClima ] = useState(0)
+    console.log(props);
+    
     const arrayClima = [ "01d" , "01n" , "02d" , "02n" , "10d" , "11n" , "13d" ]
+    
     const climaSemana = (max) => {
         return Math.floor(Math.random() * max)
     }
 
     useEffect(()=>{
-        clima = arrayClima[climaSemana(arrayClima.length - 1)]
-        console.log(clima+12);
-    },[city]) 
-    // fim da função
-    
-    setTimeout(()=>{
+        setClima(arrayClima[climaSemana(arrayClima.length - 1)])
+
+
         if (clima == "03n" || clima == "03d" || clima == "04d" || clima == "04n") {
             setImgClima(nublado) //nublado
         } else if (clima == "09d" || clima == "09n" || clima == "10d" || clima == "10n") {
@@ -47,13 +46,14 @@ export default function CardSemana(props){
         } else {
             setImgClima(luaNuves)
         }
-        console.log(clima+14);
-    },200)
+    },[cityApi]) 
+    // fim da função
 
     return (
-        <section className="bg-white rounded-lg p-2">
+        <section className="bg-white rounded-lg px-2 min-w-24 text-center">
             <article>
-                <img src={imgClima} alt="" />
+                <h3>{props.climaAPI.dia}</h3>
+                <img src={imgClima} alt="" className="w-20"/>
                 <div>
                     <p>18</p>
                     <p>19 / 20</p>
