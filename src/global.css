@@ -94,3 +94,16 @@ abbr {
         transform: rotateY(90deg);
     }
 }
+
+.animacao {
+    animation: msg 6s;
+}
+
+@keyframes msg {
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+}

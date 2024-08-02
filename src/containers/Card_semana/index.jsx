@@ -55,8 +55,8 @@ export default function CardSemana(props){
                 <h3>{props.climaAPI.dia}</h3>
                 <img src={imgClima} alt="" className="w-20"/>
                 <div>
-                    <p>18</p>
-                    <p>19 / 20</p>
+                    <p>{props.climaAPI.temp}</p>
+                    <p>{props.climaAPI.tempMin} / {props.climaAPI.tempMax}</p>
                 </div>
             </article>
         </section>
