@@ -87,7 +87,9 @@ export default function CardEstendido (props) {
                             <div className="flex">{props.climaAPI.PorSol}<img src={porSol} alt="" /></div>
                         </div>
                     </div>
-                    <a href="https://openweathermap.org/" target="_blank" className="text-end underline text-gray-400">fonte: Openweather</a>
+                    <div className="text-right">
+                        <a href="https://openweathermap.org/" target="_blank" className="underline text-gray-400">fonte: Openweather</a>
+                    </div>
                 </div>
             </div>
         </section>

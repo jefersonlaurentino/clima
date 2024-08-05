@@ -25,6 +25,9 @@ export default function CardSemana(props){
 
     useEffect(()=>{
         setClima(arrayClima[climaSemana(arrayClima.length - 1)])
+        console.log(arrayClima);
+        console.log(arrayClima.length);
+        
 
 
         if (clima == "03n" || clima == "03d" || clima == "04d" || clima == "04n") {
