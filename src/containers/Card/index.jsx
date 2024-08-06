@@ -61,11 +61,11 @@ export default function Card(props) {
             </div>
             <article className="flex flex-col gap-3">
                 <div className="flex justify-between">
-                    <p>Censação: <span>{props.climaAPI.censacao}</span></p>
+                    <p>Censação: <span>{props.climaAPI.sensacao}</span></p>
                     <p>Umidade: <span>{props.climaAPI.umidade}</span></p>
                 </div>
                 <div className="flex justify-between">
-                    <abbr title="Velocidade do vento"><img src={vento} alt="" /> <span>{props.climaAPI.veloVento}</span>/km</abbr>
+                    <abbr title="Velocidade do vento"><img src={vento} alt="" /> <span>{props.climaAPI.veloVento}</span></abbr>
                     <p>
                         <img src={direcao} alt="" style={{transform: `rotateZ(${Number(props.climaAPI.dereVento)}deg)`}} />
                     </p>

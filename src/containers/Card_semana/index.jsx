@@ -14,8 +14,7 @@ export default function CardSemana(props){
     // função para mudar as imagens do clima sem a Api
     const { cityApi } = useContext(cityAPI)
     const [ imgClima , setImgClima ] = useState("")
-    const [ clima , setClima ] = useState(0)
-    console.log(props);
+    const [ clima , setClima ] = useState("")
     
     const arrayClima = [ "01d" , "01n" , "02d" , "02n" , "10d" , "11n" , "13d" ]
     
@@ -25,10 +24,6 @@ export default function CardSemana(props){
 
     useEffect(()=>{
         setClima(arrayClima[climaSemana(arrayClima.length - 1)])
-        console.log(arrayClima);
-        console.log(arrayClima.length);
-        
-
 
         if (clima == "03n" || clima == "03d" || clima == "04d" || clima == "04n") {
             setImgClima(nublado) //nublado
@@ -53,7 +48,7 @@ export default function CardSemana(props){
     // fim da função
 
     return (
-        <section className="bg-white rounded-lg px-2 min-w-24 text-center">
+        <section className="bg-white rounded-lg px-2 mb-2 min-w-24 text-center">
             <article>
                 <h3>{props.climaAPI.dia}</h3>
                 <img src={imgClima} alt="" className="w-20"/>

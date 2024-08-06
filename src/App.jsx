@@ -22,7 +22,7 @@ export function App() {
   const [ imgClima , setImgClima ] = useState("")
   const [ tempMax , setTempMax ] = useState('')
   const [ tempMin , setTempMin ] = useState('')
-  const [ censacao , setCensacao ] = useState('')
+  const [ sensacao , setsensacao ] = useState('')
   const [ umidade , setUmidade ] = useState('')
   const [ veloVento , setVeloVento ] = useState('')
   const [ dereVento , setDereVento ] = useState('')
@@ -49,9 +49,9 @@ export function App() {
     setTemp(parseInt(dadosClima.main.temp))
     setTempMax(parseInt(dadosClima.main.temp_max))
     setTempMin(parseInt(dadosClima.main.temp_min))
-    setCensacao(parseInt(dadosClima.main.feels_like))
-    setUmidade(dadosClima.main.humidity)
-    setVeloVento(parseInt(dadosClima.wind.speed * 3.6))
+    setsensacao(parseInt(dadosClima.main.feels_like))
+    setUmidade(`${dadosClima.main.humidity}%`)
+    setVeloVento(`${parseInt(dadosClima.wind.speed * 3.6)}Km/h`)
     setDereVento(dadosClima.wind.deg)
     setLon(dadosClima.coord.lon)
     setLat(dadosClima.coord.lat)
@@ -84,27 +84,45 @@ export function App() {
   },[cityApi])
 
   let tamanhoTela = null
-  addEventListener("resize" , (evt) =>{
-    let cardSelecionado = document.querySelector(".card").classList.contains("hidden")
-    console.log(cardSelecionado);
-    
-    let size = window.innerWidth
+  let size = null
+  
+
+  const reSize = () =>{
+    (window.innerWidth > 550)? tamanhoTela = true: tamanhoTela = false
+  }
+
+  addEventListener("resize" , () =>{
+    size = window.innerWidth
+    let card = document.querySelector(".card").classList.contains("hidden")
+    let e = null
     if (size < 550) {
       tamanhoTela = false
-      if (cardSelecionado) {
-        document.querySelector('.cardPhone').classList.remove("hidden")
-        document.querySelector(".cardPhone").classList.add("rodar_card_estendido")
+      
+      if (card) {
+        document.querySelector(".card_estendido").classList.add("true")
+        e = document.querySelector(".card_estendido").classList.contains("true")
+      }
+      if (e) {
+        document.querySelector(".card_estendido").classList.add('hidden')
+        document.querySelector(".cardPhone").classList.remove('hidden')
+        document.querySelector(".cardPhone").classList.remove('true')
       }
     } else {
       tamanhoTela = true
-      if (cardSelecionado) {
-        document.querySelector(".card_estendido").classList.remove("hidden")
-        document.querySelector(".card_estendido").classList.add("rodar_card_estendido")
+      if (card) {
+        document.querySelector(".cardPhone").classList.add("true")
+        e = document.querySelector(".cardPhone").classList.contains("true")
+      }
+      if (e) {
+        document.querySelector(".cardPhone").classList.add('hidden')
+        document.querySelector(".card_estendido").classList.remove('hidden')
+        document.querySelector(".card_estendido").classList.remove('true')
       }
     }
   })
 
   const estenderCard = () => {
+    reSize()
     document.querySelector(".card").classList.remove("rodar_card_estendido")
     document.querySelector(".card").classList.remove("card_estendi")
     document.querySelector(".card").removeAttribute("style")
@@ -113,12 +131,16 @@ export function App() {
       document.querySelector(".card").classList.add("hidden")
       document.querySelector(".card").classList.remove("rodar_card")
       document.querySelector('.cardPhone').classList.remove("voltar")
+      document.querySelector('.cardPhone').classList.add("card_estendi")
       if (tamanhoTela) {
         document.querySelector(".card_estendido").classList.remove("hidden")
+        document.querySelector(".card_estendido").classList.remove("hidden")
         document.querySelector(".card_estendido").classList.add("rodar_card_estendido")
+        document.querySelector(".card_estendido").classList.add("true")
       } else {
         document.querySelector('.cardPhone').classList.remove("hidden")
         document.querySelector(".cardPhone").classList.add("rodar_card_estendido")
+        document.querySelector(".cardPhone").classList.add("true")
       }
       setTimeout(()=>{
         document.querySelector(".cardPhone").style = "transform: rotateY(0deg);"
@@ -130,6 +152,8 @@ export function App() {
   }
 
   const minimizarCard = () => {
+    document.querySelector(".cardPhone").classList.remove("true")
+    document.querySelector(".card_estendido").classList.remove("true")
     document.querySelector(".cardPhone").classList.remove("rodar_card_estendido")
     document.querySelector(".cardPhone").classList.remove("card_estendi")
     document.querySelector(".cardPhone").classList.add("voltar")
@@ -138,13 +162,8 @@ export function App() {
     setTimeout(()=>{
       setTimeout(()=>{
         document.querySelector(".cardPhone").removeAttribute("style")
-        document.querySelector(".cardPhone").classList.add("card_estendi")
-        if (tamanhoTela) {
-          document.querySelector(".card_estendido").classList.add("hidden")
-        } else {
-          document.querySelector(".cardPhone").classList.add("hidden")
-        
-        }
+        document.querySelector(".card_estendido").classList.add("hidden")
+        document.querySelector(".cardPhone").classList.add("hidden")
         document.querySelector(".card_estendido").classList.remove("info_voltar")
         document.querySelector(".card_estendido").removeAttribute("style")
         document.querySelector(".card").classList.remove("hidden")
@@ -174,9 +193,15 @@ export function App() {
           </Cabecalho>
         <main>
           <section className="flex justify-center items-center">
-            {((!dadosClima == "")?<Card click={estenderCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , censacao ,nascerSol , PorSol }}/>:'')}
-            {((!dadosClima == "")?<CardEstendido click={minimizarCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , censacao ,nascerSol , PorSol}}/>:'')}
-            <Card_phone click={minimizarCard}/>
+            {((!dadosClima == "")?<Card click={estenderCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , sensacao ,nascerSol , PorSol }}/>:'')}
+            {((!dadosClima == "")?<CardEstendido 
+            click={minimizarCard} 
+            climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , sensacao ,nascerSol , PorSol}}/>:'')}
+            <Card_phone click={minimizarCard} climaAPI={
+              {
+                lat , lon , sensacao , dereVento , nascerSol , umidade , PorSol , veloVento
+              }
+            }/>
           </section>
          
           <section className="mt-5 m-auto max-w-5xl">
@@ -190,7 +215,7 @@ export function App() {
               <img src={ajuda} alt="ajuda" className="cursor-pointer w-5 h-5" onClick={msgInformacao}/>
             </div>
             <div className="flex justify-around gap-2 p-2 overflow-y-hidden">
-              {semana.map((dia)=><CardSemana climaAPI={{imgClima , temp , tempMax , tempMin , dia}}/>)}
+              {semana.map((dia)=><CardSemana key={dia} climaAPI={{imgClima , temp , tempMax , tempMin , dia}}/>)}
             </div>
           </section>
         </main>

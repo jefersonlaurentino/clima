@@ -66,19 +66,12 @@ export default function CardEstendido (props) {
                         <p>Lat: {props.climaAPI.lat}</p>
                         <p>Lon: {props.climaAPI.lon}</p>
                     </div>
-                    {/* <div>
-                        <h3>chuva</h3>
-                        <div className="flex justify-between">
-                            <p>Em 1h: {(chuvaDe1h != "")? `${chuvaDe1h}mm` : '0mm'}</p>
-                            <p>Em 3h: {(chuvaDe3h != "")? `${chuvaDe3h}mm` : '0mm'}</p>
-                        </div>
-                    </div> */}
                     <div className="flex justify-between">
                         <p>Censação: {props.climaAPI.censacao}</p>
-                        <abbr title="umidade">{props.climaAPI.umidade}%<img src={umidade} alt="" /></abbr>
+                        <abbr title="umidade">{props.climaAPI.umidade}<img src={umidade} alt="" /></abbr>
                     </div>
                     <div className="flex justify-between">
-                        <div className="flex gap-1"><img src={vento} alt="" /><p>{props.climaAPI.veloVento}Km/h</p></div>
+                        <div className="flex gap-1"><img src={vento} alt="" /><p>{props.climaAPI.veloVento}</p></div>
                         <p style={{transform: `rotateZ(${Number(props.climaAPI.dereVento)}deg)`}}><img src={direcao} alt="Direção do vento" /></p>
                     </div>
                     <div className="flex justify-between">
