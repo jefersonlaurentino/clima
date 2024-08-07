@@ -1,3 +1,6 @@
+import celsius from "../../../src/imagens/celsius.png"
+import celsiusMax from "../../../src/imagens/celsius_max.png"
+import celsiusMin from "../../../src/imagens/celsius_min.png"
 import nublado from "../../../src/imagens/02n.png"
 import chuva from "../../../src/imagens/10d.png"
 import chuvaForte from "../../../src/imagens/11n.png"
@@ -48,13 +51,13 @@ export default function CardSemana(props){
     // fim da função
 
     return (
-        <section className="bg-white rounded-lg px-2 mb-2 min-w-24 text-center">
+        <section className="bg-white rounded-lg p-2 mb-1 min-w-[98px] text-center leading-none">
             <article>
                 <h3>{props.climaAPI.dia}</h3>
                 <img src={imgClima} alt="" className="w-20"/>
                 <div>
-                    <p>{props.climaAPI.temp}</p>
-                    <p>{props.climaAPI.tempMin} / {props.climaAPI.tempMax}</p>
+                    <p className="flex items-start justify-center">{props.climaAPI.temp} <img src={celsius} alt="" className="w-3"/></p>
+                    <p className="flex items-end"><img src={celsiusMin} alt="" className="w-3"/>{props.climaAPI.tempMin}  / {props.climaAPI.tempMax} <img src={celsiusMax} alt="" className="w-3"/></p>
                 </div>
             </article>
         </section>

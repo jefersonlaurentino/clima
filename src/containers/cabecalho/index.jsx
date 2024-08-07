@@ -1,3 +1,4 @@
+import gps from "../../imagens/sinal-de-localizacao.png"
 import { useContext, useState } from "react"
 import cityAPI from "../context/CityApi";
 
@@ -13,21 +14,24 @@ export default function Cabecalho({children}) {
     }
 
     return (
-        <header className="flex justify-center p-3">
+        <header className="flex flex-col items-center py-2 min-h-[72px]">
             <form 
                 onSubmit={evt => click(evt)} 
-                className="bg-white rounded-2xl flex items-center overflow-hidden">
+                className="bg-white rounded-2xl flex items-center overflow-hidden pl-1">
+                <img src={gps} alt=""/>
                 <input 
                     type="text" 
                     value={inputCity} 
+                    placeholder="Digite o nome da cidade"
                     onChange={evt => setInputCity(evt.target.value)} 
-                    className="outline-none px-2 py-1"/>
+                    className="outline-none pl-1"/>
                 <button 
-                    className="h-full px-2" 
+                    className="p-2" 
                     type="submit">
                     { children }
                 </button>
             </form>
+            <p></p>
         </header>
     )
 }

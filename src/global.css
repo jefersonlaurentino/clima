@@ -18,6 +18,15 @@ abbr {
     text-decoration: none;
 }
 
+@layer components {
+    .info_campo {
+        @apply flex flex-col leading-none;
+    }
+    .campo_info {
+        @apply flex items-center;
+    }
+}
+
 .rodar_card {
     animation: card linear 2s;  
 }
