@@ -31,7 +31,7 @@ export default function Cabecalho({children}) {
                     { children }
                 </button>
             </form>
-            <p></p>
+            <p className="info_city"></p>
         </header>
     )
 }

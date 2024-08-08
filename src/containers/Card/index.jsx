@@ -1,3 +1,7 @@
+import imgSensacao from "../../../src/imagens/termico.png"
+import celsius from "../../../src/imagens/celsius.png"
+import celsiusMax from "../../../src/imagens/celsius_max.png"
+import celsiusMin from "../../../src/imagens/celsius_min.png"
 import umidade from "../../../src/imagens/umidade.png"
 import vento from "../../../src/imagens/vento.png"
 import direcao from "../../../src/imagens/direcao.png"
@@ -45,30 +49,48 @@ export default function Card(props) {
                 <p>{props.climaAPI.city}</p>
             </div>
             <div className="flex justify-center items-center">
-                <div className="w-1/2">
+                <div className="w-2/5">
                     <img src={imgClima} alt={props.climaAPI.clima} className=""/>
                 </div>
-                <div className="flex text-center flex-col items-center justify-center w-1/2">
+                <div className="flex text-center flex-col items-center justify-center w-3/5 h-24">
                     <div>
-                        <h2 className="text-3xl font-semibold">{props.climaAPI.temp}</h2>
+                        <h2 className="text-3xl font-semibold flex items-start ml-5">{props.climaAPI.temp} <img src={celsius} alt="" /></h2>
                     </div>
                     <div className="flex gap-1">
-                        <h3 className="">{props.climaAPI.tempMin}</h3>
-                        <p>/</p>
-                        <h3 className="">{props.climaAPI.tempMax}</h3>
-                    </div><h1>{props.climaAPI.clima}</h1>
+                        <p className="flex items-end"><img src={celsiusMin} alt="" />{props.climaAPI.tempMin} / {props.climaAPI.tempMax}<img src={celsiusMax} alt="" /></p>
+                    </div>
+                    <h1 className="font-semibold">{props.climaAPI.clima}</h1>
                 </div>
             </div>
-            <article className="flex flex-col gap-3">
+            <article className="flex flex-col gap-2">
                 <div className="flex justify-between">
-                    <p>Censação: <span>{props.climaAPI.sensacao}</span></p>
-                    <p>Umidade: <span>{props.climaAPI.umidade}</span></p>
+                    <div className="campo_info">
+                        <img src={imgSensacao} alt="" />
+                        <div className="info_campo">
+                            <h3>Sensacao</h3>
+                            <p>{props.climaAPI.sensacao}</p>
+                        </div>
+                    </div>
+                    <div className="campo_info ml-7">
+                        <div className="info_campo text-right">
+                            <h3>Umidade</h3>
+                            <p>{props.climaAPI.umidade}</p>
+                        </div>
+                        <img src={umidade} alt="" />
+                    </div>
                 </div>
                 <div className="flex justify-between">
-                    <abbr title="Velocidade do vento"><img src={vento} alt="" /> <span>{props.climaAPI.veloVento}</span></abbr>
-                    <p>
-                        <img src={direcao} alt="" style={{transform: `rotateZ(${Number(props.climaAPI.dereVento)}deg)`}} />
-                    </p>
+                    <div className="campo_info">
+                        <img src={vento} alt="" />
+                        <div className="info_campo">
+                            <h3>Vel. vento</h3>
+                            <p>{props.climaAPI.veloVento}</p>
+                        </div>
+                    </div>
+                    <div className="flex items-center flex-col">
+                        <h3>Der. vento</h3>
+                        <img src={direcao} alt="" style={{transform: `rotateZ(${Number(props.climaAPI.dereVento)}deg)`,width: "1.5rem"}} />
+                    </div>
                 </div>
             </article>
             <button className="absolute bottom-1 underline" onClick={props.click}>Mais informações</button>

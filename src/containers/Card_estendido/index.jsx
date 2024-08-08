@@ -56,16 +56,14 @@ export default function CardEstendido (props) {
                     <img src={imgClima} alt="" className="w-48"/>
                     <p className="font-semibold">{props.climaAPI.clima}</p>
                     <h3 className="font-semibold text-3xl flex items-start">{props.climaAPI.temp} <img src={celsius} alt=""/></h3>
-                    <div className="flex gap-1 text-2xl">
-                        <p className="flex items-end"><img src={celsiusMin} alt="" />{props.climaAPI.tempMin}</p>
-                        <p>/</p>
-                        <p className="flex items-end">{props.climaAPI.tempMax} <img src={celsiusMax} alt="" /></p>
+                    <div className="flex text-2xl">
+                        <p className="flex items-end mr-5"><img src={celsiusMin} alt="" />{props.climaAPI.tempMin} / {props.climaAPI.tempMax} <img src={celsiusMax} alt="" /></p>
                     </div>
                 </div>
                 <button className="absolute bottom-1 underline" onClick={props.click}>Voltar as informações</button>
             </div>
             <div>
-                <div className="absolute w-1/2 h-[95%] pr-2 div_info flex flex-col justify-between">
+                <div className="absolute w-1/2 h-[95%] p-2 div_info flex flex-col justify-between">
                     <div className="flex justify-between">
                         <div className="info_campo ml-2">
                             <h3>Latitude</h3>
