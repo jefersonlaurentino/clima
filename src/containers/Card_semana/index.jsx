@@ -55,9 +55,9 @@ export default function CardSemana(props){
             <article>
                 <h3>{props.climaAPI.dia}</h3>
                 <img src={imgClima} alt="" className="w-20"/>
-                <div>
-                    <p className="flex items-start justify-center">{props.climaAPI.temp} <img src={celsius} alt="" className="w-3"/></p>
-                    <p className="flex items-end"><img src={celsiusMin} alt="" className="w-3"/>{props.climaAPI.tempMin}  / {props.climaAPI.tempMax} <img src={celsiusMax} alt="" className="w-3"/></p>
+                <div className="flex flex-col items-center">
+                    <p className="flex ml-1">{props.climaAPI.tempMax}<img src={celsiusMax} alt="" className="w-3"/></p>
+                    <p className="flex mr-2">{props.climaAPI.tempMin}<img src={celsiusMin} alt="" className="w-3"/></p>
                 </div>
             </article>
         </section>

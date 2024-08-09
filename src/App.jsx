@@ -211,10 +211,10 @@ export function App() {
                   <p>As informações do clima para os próximos dias da semana são falsas. A API utilizada não tem a funcionalidade necessária, mas é um exemplo de como seria mostrado as informações.</p>
                 </div>
               </div>
-              <h2 className="m-1">Proximas Semanas: </h2>
+              <h2 className="pl-3">Proximas Semanas: </h2>
               <img src={ajuda} alt="ajuda" className="cursor-pointer w-5 h-5" onClick={msgInformacao}/>
             </div>
-            <div className="flex justify-around gap-2 p-2 overflow-y-hidden">
+            <div className="div_semana flex justify-around gap-2 p-3 overflow-y-hidden">
               {semana.map((dia)=><CardSemana key={dia} climaAPI={{imgClima , temp , tempMax , tempMin , dia}}/>)}
             </div>
           </section>

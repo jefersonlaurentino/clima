@@ -43,7 +43,7 @@ export default function Card(props) {
     },200)
     
     return (
-        <section className="relative card bg-white w-56 h-[300px] p-2 flex flex-col gap-5 rounded-xl">
+        <section className="relative card bg-white w-56 h-[300px] p-2 flex flex-col justify-between rounded-xl">
             <div className="logo flex flex-col items-center">
                 <img src={props.climaAPI.pais} alt="" className="w-6"/>
                 <p>{props.climaAPI.city}</p>
@@ -52,7 +52,7 @@ export default function Card(props) {
                 <div className="w-2/5">
                     <img src={imgClima} alt={props.climaAPI.clima} className=""/>
                 </div>
-                <div className="flex text-center flex-col items-center justify-center w-3/5 h-24">
+                <div className="flex text-center flex-col items-center justify-center w-3/5 h-28">
                     <div>
                         <h2 className="text-3xl font-semibold flex items-start ml-5">{props.climaAPI.temp} <img src={celsius} alt="" /></h2>
                     </div>
@@ -67,8 +67,8 @@ export default function Card(props) {
                     <div className="campo_info">
                         <img src={imgSensacao} alt="" />
                         <div className="info_campo">
-                            <h3>Sensacao</h3>
-                            <p>{props.climaAPI.sensacao}</p>
+                            <h3>Sensação</h3>
+                            <p className="flex items-start ml-1">{props.climaAPI.sensacao} <img src={celsius} alt="" className="w-3"/></p>
                         </div>
                     </div>
                     <div className="campo_info ml-7">
@@ -79,21 +79,8 @@ export default function Card(props) {
                         <img src={umidade} alt="" />
                     </div>
                 </div>
-                <div className="flex justify-between">
-                    <div className="campo_info">
-                        <img src={vento} alt="" />
-                        <div className="info_campo">
-                            <h3>Vel. vento</h3>
-                            <p>{props.climaAPI.veloVento}</p>
-                        </div>
-                    </div>
-                    <div className="flex items-center flex-col">
-                        <h3>Der. vento</h3>
-                        <img src={direcao} alt="" style={{transform: `rotateZ(${Number(props.climaAPI.dereVento)}deg)`,width: "1.5rem"}} />
-                    </div>
-                </div>
             </article>
-            <button className="absolute bottom-1 underline" onClick={props.click}>Mais informações</button>
+            <button className="underline text-left" onClick={props.click}>Mais informações</button>
         </section>
     )
 }
