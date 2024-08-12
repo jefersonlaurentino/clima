@@ -60,8 +60,8 @@ export function App() {
   },350)
 
   useEffect(() => {
-    navigator.geolocation.watchPosition((localizacao) => {
-    alert(localizacao.coords.accuracy);
+    navigator.geolocation.getCurrentPosition((localizacao) => {
+    alert(localizacao.coords.accuracy , localizacao.coords.latitude , localizacao.coords.longitude)
     apiLocalizacao(localizacao.coords.latitude,localizacao.coords.longitude)
     }, function(erro) {
       console.log(erro);
