@@ -59,6 +59,22 @@ export function App() {
     setPorSol((`${(porHoras < 10) ? "0"+porHoras: porHoras}:${(porNimutos < 10) ? "0"+porNimutos : porNimutos}`))
   },350)
 
+  useEffect(() => {
+    navigator.geolocation.watchPosition((localizacao) => {
+    alert(localizacao.coords.accuracy);
+    apiLocalizacao(localizacao.coords.latitude,localizacao.coords.longitude)
+    }, function(erro) {
+      console.log(erro);
+    }, { enableHighAccuracy: true , maximumAge: 3000, timeout: 30000})
+  },[])
+
+  const apiLocalizacao = (latitude , longitude) =>{
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=46a95d36faa14230ee1af68172883766&lang=pt_br&units=metric`)
+      .then(res => res.json())
+      .then(res => setDadosClima(res))
+      .catch(err => console.log(err))
+  }
+
   const api = async()=>{
     return await (
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityApi}&APPID=46a95d36faa14230ee1af68172883766&lang=pt_br&units=metric`)
