@@ -3,7 +3,7 @@ import celsius from "../../../src/imagens/celsius.png"
 import celsiusMax from "../../../src/imagens/celsius_max.png"
 import celsiusMin from "../../../src/imagens/celsius_min.png"
 import umidade from "../../../src/imagens/umidade.png"
-import nublado from "../../../src/imagens/02n.png"
+import nublado from "../../../src/imagens/03n.png"
 import chuva from "../../../src/imagens/10d.png"
 import chuvaForte from "../../../src/imagens/11n.png"
 import neve from "../../imagens/13d.png"
@@ -23,11 +23,11 @@ export default function Card(props) {
             setImgClima(nublado) //nublado
         } else if (clima == "09d" || clima == "09n" || clima == "10d" || clima == "10n") {
             setImgClima(chuva) // chuva
-        } else if (clima == "11d") {
+        } else if (clima == "11d" || clima == "11n") {
             setImgClima(chuvaForte) //chuva com trovoadas
-        } else if ( clima == "13n") {
+        } else if ( clima == "13n" || clima == "13d") {
             setImgClima(neve) //neve
-        } else if ( clima == "50n") {
+        } else if ( clima == "50n" || clima == "50d") {
             setImgClima(nevoa) //nevoa
         } else if ( clima == "01d"){
             setImgClima(sol)

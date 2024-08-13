@@ -13,6 +13,7 @@ export default function Cabecalho({children}) {
         // tes()
         setCityApi(inputCity)
         document.querySelector(".cards_city").classList.remove("hidden")
+        document.querySelector(".info_city").innerHTML = ""
         setInputCity("")
     }
 
@@ -35,7 +36,8 @@ export default function Cabecalho({children}) {
                     { children }
                 </button>
             </form>
-            <p className="info_city"></p>
+            <p className="info_city drop-shadow-2xl font-bold"></p>
+
         </header>
     )
 }

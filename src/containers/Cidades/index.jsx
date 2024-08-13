@@ -10,7 +10,7 @@ export default function Cidades() {
         return await (
             fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=46a95d36faa14230ee1af68172883766`)
             .then(res => res.json())
-            .catch(error => console.log(error))
+            .catch(erro =>console.log(erro))
         )
     }
 
@@ -21,8 +21,15 @@ export default function Cidades() {
     useEffect(()=>{
         if( cityApi != ""){
             consumirApi()
-        }
+        } 
     },[cityApi])
+
+    useEffect(()=>{
+        if (cidade.length == 0) {
+            document.querySelector(".info_city").innerHTML = "ERRO! Cidade Não Encontrada."
+            document.querySelector(".cards_city").classList.add("hidden") 
+        } 
+    },[cidade])
 
     // adicionada a função "keyCard" para evitar o erro na key do react dos campo de selecionar a cidade que vem repetidas da API. ex: cidade parís.
     function keyCard(max){

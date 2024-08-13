@@ -67,6 +67,7 @@ export function App() {
     apiLocation(localizacao.coords.latitude,localizacao.coords.longitude)
     }, function(erro) {
       console.log(erro);
+      document.querySelector(".info_city").innerHTML = "Permissão de Localização Bloqueada."
     }, { enableHighAccuracy: true , maximumAge: 30000, timeout: 30000})
   },[])
 
@@ -81,7 +82,10 @@ export function App() {
     if (latitude != undefined) {
       return await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=46a95d36faa14230ee1af68172883766&lang=pt_br&units=metric`)
       .then(res => res.json())
-      .catch(err => console.log(err))
+      .catch(err =>{
+        console.log(err)
+        document.querySelector(".info_city").innerHTML = "ERRO! Cidade Não Encontrada."
+      })
     } else {
       return await (
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=sao%20paulo&APPID=46a95d36faa14230ee1af68172883766&lang=pt_br&units=metric`)
