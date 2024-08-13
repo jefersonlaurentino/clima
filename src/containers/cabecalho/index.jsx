@@ -1,6 +1,7 @@
 import gps from "../../imagens/sinal-de-localizacao.png"
 import { useContext, useState } from "react"
 import cityAPI from "../context/CityApi";
+import CityLocation from "../context/CityLocation";
 
 export default function Cabecalho({children}) {
     const { setCityApi } = useContext(cityAPI)
@@ -9,10 +10,13 @@ export default function Cabecalho({children}) {
 
     const click = (click) =>{
         click.preventDefault()
+        // tes()
         setCityApi(inputCity)
+        document.querySelector(".cards_city").classList.remove("hidden")
         setInputCity("")
     }
 
+    
     return (
         <header className="flex flex-col items-center py-2 min-h-[72px]">
             <form 

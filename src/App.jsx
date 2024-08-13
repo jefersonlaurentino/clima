@@ -5,14 +5,17 @@ import Card from "./containers/Card";
 import CardEstendido from "./containers/Card_estendido";
 import CardSemana from "./containers/Card_semana";
 import CityApi from "./containers/context/CityApi"
+import CityLocation from "./containers/context/CityLocation"
 import ajuda from "./imagens/question.png"
 import { useEffect, useState } from "react";
 import Card_phone from "./containers/Card_phone";
+import Cidades from "./containers/Cidades";
 
 
 export function App() {
 
   const [ cityApi , setCityApi ] = useState("sao paulo")
+  const [ cityLocation , setCityLocation ] = useState("")
   const [ dadosClima , setDadosClima ] = useState("")
 
   const [ city , setCity ] = useState()
@@ -61,30 +64,35 @@ export function App() {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((localizacao) => {
-    alert(localizacao.coords.accuracy , localizacao.coords.latitude , localizacao.coords.longitude)
-    apiLocalizacao(localizacao.coords.latitude,localizacao.coords.longitude)
+    apiLocation(localizacao.coords.latitude,localizacao.coords.longitude)
     }, function(erro) {
       console.log(erro);
-    }, { enableHighAccuracy: true , maximumAge: 3000, timeout: 30000})
+    }, { enableHighAccuracy: true , maximumAge: 30000, timeout: 30000})
   },[])
 
-  const apiLocalizacao = (latitude , longitude) =>{
+  const apiLocation = (latitude, longitude) =>{
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=46a95d36faa14230ee1af68172883766&lang=pt_br&units=metric`)
       .then(res => res.json())
       .then(res => setDadosClima(res))
       .catch(err => console.log(err))
   }
 
-  const api = async()=>{
-    return await (
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityApi}&APPID=46a95d36faa14230ee1af68172883766&lang=pt_br&units=metric`)
+  const apiLocalizacao = async(latitude , longitude) =>{
+    if (latitude != undefined) {
+      return await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=46a95d36faa14230ee1af68172883766&lang=pt_br&units=metric`)
+      .then(res => res.json())
+      .catch(err => console.log(err))
+    } else {
+      return await (
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=sao%20paulo&APPID=46a95d36faa14230ee1af68172883766&lang=pt_br&units=metric`)
         .then(res => res.json())
         .catch(err => console.log(err))
       )
     }
+  }
 
   const consumirAPI = async() =>{
-    setDadosClima(await api(cityApi))
+    setDadosClima(await apiLocalizacao(cityLocation[0],cityLocation[1]))
   }
 
   useEffect(()=>{
@@ -97,7 +105,7 @@ export function App() {
     diaPos.forEach((e)=>array.push(e))
     diaAnt.forEach((e)=>array.push(e))
     setSemana(array)
-  },[cityApi])
+  },[cityLocation])
 
   let tamanhoTela = null
   let size = null
@@ -200,41 +208,43 @@ export function App() {
       document.querySelector(".informacao").classList.remove('animacao')
     },6000)
   }
-
+  
   return (
     <> 
         <CityApi.Provider value={{ cityApi , setCityApi }}>
-          <Cabecalho>
-            <FaSearch />
-          </Cabecalho>
-        <main>
-          <section className="flex justify-center items-center">
-            {((!dadosClima == "")?<Card click={estenderCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , sensacao ,nascerSol , PorSol }}/>:'')}
-            {((!dadosClima == "")?<CardEstendido 
-            click={minimizarCard} 
-            climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , sensacao ,nascerSol , PorSol}}/>:'')}
-            <Card_phone click={minimizarCard} climaAPI={
-              {
-                lat , lon , sensacao , dereVento , nascerSol , umidade , PorSol , veloVento
-              }
-            }/>
-          </section>
-         
-          <section className="mt-5 m-auto max-w-5xl">
-            <div className="relative flex items-center">
-              <div className="informacao absolute max-w-96 -top-28 opacity-0 hidden">
-                <div className="w-11/12 bg-neutral-700 text-white p-2 text-justify m-auto rounded-md">
-                  <p>As informações do clima para os próximos dias da semana são falsas. A API utilizada não tem a funcionalidade necessária, mas é um exemplo de como seria mostrado as informações.</p>
+          <CityLocation.Provider value={{ cityLocation , setCityLocation}}>
+            <Cabecalho>
+              <FaSearch />
+            </Cabecalho>
+                    <main>
+            <Cidades></Cidades>
+            <section className="flex justify-center items-center">
+              {((!dadosClima == "")?<Card click={estenderCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , sensacao ,nascerSol , PorSol }}/>:'')}
+              {((!dadosClima == "")?<CardEstendido
+              click={minimizarCard}
+              climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , sensacao ,nascerSol , PorSol}}/>:'')}
+              <Card_phone click={minimizarCard} climaAPI={
+                {
+                  lat , lon , sensacao , dereVento , nascerSol , umidade , PorSol , veloVento
+                }
+              }/>
+            </section>
+            <section className="mt-5 m-auto max-w-5xl">
+              <div className="relative flex items-center">
+                <div className="informacao absolute max-w-96 -top-28 opacity-0 hidden">
+                  <div className="w-11/12 bg-neutral-700 text-white p-2 text-justify m-auto rounded-md">
+                    <p>As informações do clima para os próximos dias da semana são falsas. A API utilizada não tem a funcionalidade necessária, mas é um exemplo de como seria mostrado as informações.</p>
+                  </div>
                 </div>
+                <h2 className="pl-3">Proximas Semanas: </h2>
+                <img src={ajuda} alt="ajuda" className="cursor-pointer w-5 h-5" onClick={msgInformacao}/>
               </div>
-              <h2 className="pl-3">Proximas Semanas: </h2>
-              <img src={ajuda} alt="ajuda" className="cursor-pointer w-5 h-5" onClick={msgInformacao}/>
-            </div>
-            <div className="div_semana flex justify-around gap-2 p-3 overflow-y-hidden">
-              {semana.map((dia)=><CardSemana key={dia} climaAPI={{imgClima , temp , tempMax , tempMin , dia}}/>)}
-            </div>
-          </section>
-        </main>
+              <div className="div_semana flex justify-around gap-2 p-3 overflow-y-hidden">
+                {semana.map((dia)=><CardSemana key={dia} climaAPI={{imgClima , temp , tempMax , tempMin , dia}}/>)}
+              </div>
+            </section>
+                    </main>
+          </CityLocation.Provider>
         </CityApi.Provider>
     </>
   )
