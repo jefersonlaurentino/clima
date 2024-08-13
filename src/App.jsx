@@ -14,7 +14,7 @@ import Cidades from "./containers/Cidades";
 
 export function App() {
 
-  const [ cityApi , setCityApi ] = useState("sao paulo")
+  const [ cityApi , setCityApi ] = useState("")
   const [ cityLocation , setCityLocation ] = useState("")
   const [ dadosClima , setDadosClima ] = useState("")
 

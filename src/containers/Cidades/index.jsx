@@ -1,10 +1,8 @@
 import { useContext, useEffect, useState } from "react"
-import CityLocation from "../context/CityLocation"
 import Card_cidade from "../Card_cidade"
 import CityAPI from "../context/CityApi";
 
 export default function Cidades() {
-    const {cityLocation , setCityLocation} = useContext(CityLocation)
     const { cityApi } = useContext(CityAPI)
     const [cidade , setCidade] =useState([])
 
@@ -16,20 +14,29 @@ export default function Cidades() {
         )
     }
 
-    const tes = async()=>{
+    const consumirApi = async()=>{
         setCidade(await api(cityApi))
     }
 
     useEffect(()=>{
         if( cityApi != ""){
-            tes()
+            consumirApi()
         }
     },[cityApi])
 
+    // adicionada a função "keyCard" para evitar o erro na key do react dos campo de selecionar a cidade que vem repetidas da API. ex: cidade parís.
+    function keyCard(max){
+        if (max != undefined) {
+            return (Number(max)* Math.random()) * 10
+        } else {
+            return Math.round() * 10
+        }
+    }
+    
     return (
         <section className="cards_city absolute z-10 w-full flex flex-col items-center hidden">
             <div className="flex flex-col gap-2 backdrop-blur-3xl p-2 rounded-xl shadow-lg">
-                {cidade.map((e)=><Card_cidade key={e.lat} cidade={e}/>)}
+                {cidade.map((e)=><Card_cidade key={keyCard(e.lat)} cidade={e}/>)}
             </div>
         </section>
     )
