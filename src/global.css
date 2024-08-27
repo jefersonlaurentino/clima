@@ -10,6 +10,10 @@
 
 body {
     background-color: #41aeda;
+    overflow-x: hidden;
+    max-width: 1024px;
+    height: 100%;
+    margin: auto;
 }
 
 abbr {
@@ -70,6 +74,10 @@ abbr {
     }
 }
 
+details[open] summary::after {
+    content: '⮟';
+}
+
 .info {
     animation: teste linear .5s;
 }
@@ -127,5 +135,19 @@ abbr {
     }
     100%{
         transform: rotatey(90deg);
+    }
+}
+
+@media (min-height: 590px) and (max-height: 800px) {
+    .prox_semana {
+        position: fixed;
+        bottom: 0%;
+    }
+}
+
+@media (min-height: 801px) {
+    .prox_semana {
+        position: absolute;
+        top: 50%;
     }
 }

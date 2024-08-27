@@ -1,0 +1,12 @@
+{
+    "resposta": [
+        {
+            "titulo": "Pesquisei uma cidade mas me mostra outra?",
+            "mensagem": "A API pode exibir o nome de um bairro ou de uma cidade próxima no lugar da cidade que você pesquisou. No entanto, não se preocupe, as informações do clima são referentes à cidade que você escolheu. Você pode conferir a localização exata clicando em 'Mais Informações', onde a latitude e a longitude serão exibidas. Com esses dados, você pode verificar a localização precisa usando um site ou aplicativo de mapas."
+        },
+        {
+            "titulo": "Mais dicas",
+            "mensagem": "Estamos trabalhando em mais dicas para ajudar você a utilizar nosso site de clima de forma ainda mais eficaz. Fique atento, em breve teremos mais orientações para você!"
+        }
+    ]
+}

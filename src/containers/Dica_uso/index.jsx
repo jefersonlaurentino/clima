@@ -1,4 +1,6 @@
 import { IoCloseSharp } from "react-icons/io5";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import respostas from "../../../database/dicasAjuda";
 
 export default function Dicas_uso(){
 
@@ -14,25 +16,30 @@ export default function Dicas_uso(){
 
     const fecharDicas = () =>{
         document.querySelector(".aside_dicas").classList.remove('right-0')
-        document.querySelector(".aside_dicas").classList.add('left-full')
+        document.querySelector(".aside_dicas").classList.add('-right-[429px]')
+        document.querySelector(".aside_dicas").classList.add('opacity-0')
     }
 
+    const respostaDicas = respostas.resposta
+    
     return (
         <>
-            <aside className="aside_dicas z-20 w-10/12 md:w-1/3 h-full absolute top-0 left-full bg-black text-white p-4 duration-150">
-                <button onClick={()=>{
-                    fecharDicas()
-                    dicasOpen()
-                    }}><IoCloseSharp className="text-2xl"/></button>
-                <div>
-                    <details className="border rounded-lg my-4 relative overflow-hidden" >
-                        <summary onClick={(evt)=>dicasOpen(evt.target)} className="flex items-center list-none py-1 px-4 after:content-['^'] after:absolute after:right-3">Pesquisei uma cidade mas me mostra outra?</summary>
-                        <p className="border-t bg-neutral-100 text-black p-2">A API pode exibir o nome de um bairro ou de uma cidade próxima no lugar da cidade que você pesquisou. No entanto, não se preocupe, as informações do clima são referentes à cidade que você escolheu. Você pode conferir a localização exata clicando em 'Mais Informações', onde a latitude e a longitude serão exibidas. Com esses dados, você pode verificar a localização precisa usando um site ou aplicativo de mapas.</p>
-                    </details>
-                    <details className="border rounded-lg my-4 relative overflow-hidden" >
-                        <summary onClick={(evt)=>dicasOpen(evt.target)} className="flex items-center list-none py-1 px-4 after:content-['^'] after:absolute after:right-3">Mais dicas</summary>
-                        <p className="border-t bg-neutral-100 text-black p-2">Estamos trabalhando em mais dicas para ajudar você a utilizar nosso site de clima de forma ainda mais eficaz. Fique atento, em breve teremos mais orientações para você!</p>
-                    </details>
+            <aside className="aside_dicas z-20 w-10/12 max-w-[429px] h-full fixed top-0 -right-[429px] bg-black text-white p-4 duration-300">
+                <div className="text-center relative">
+                    <button onClick={()=>{
+                        fecharDicas()
+                        dicasOpen()
+                        }}
+                        className="absolute left-0"
+                    ><IoCloseSharp className="text-2xl"/>
+                    </button>
+                    <h4>Perguntas frequentes</h4>
+                </div>
+                <div className="h-full py-3 overflow-x-hidden">
+                    {respostaDicas.map((e)=><details key={e} className="border rounded-lg my-4 relative overflow-hidden">
+                        <summary onClick={(evt)=>dicasOpen(evt.target)} className="flex items-center py-1 px-4 after:content-['➤'] after:absolute after:right-3">{e.titulo}</summary>
+                        <p className="border-t bg-neutral-100 text-black p-2">{e.mensagem}</p>
+                    </details>)}
                 </div>
             </aside>
         </>

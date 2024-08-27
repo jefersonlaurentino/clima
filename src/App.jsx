@@ -236,7 +236,7 @@ export function App() {
               }/>
               <DicaUso/>
             </section>
-            <section className="mt-5 m-auto max-w-5xl">
+            <section className="prox_semana mt-5 m-auto max-w-5xl w-full">
               <div className="relative flex items-center">
                 <div className="informacao absolute max-w-96 -top-28 opacity-0 hidden">
                   <div className="w-11/12 bg-neutral-700 text-white p-2 text-justify m-auto rounded-md">
@@ -245,7 +245,7 @@ export function App() {
                 </div>
                 <h2 className="pl-3 font-semibold">Proximas Semanas: </h2>
                 <img src={ajuda} alt="ajuda" className="cursor-pointer w-5 h-5" onClick={msgInformacao}/>
-                <div className="absolute right-5 hidden max-sm:block">
+                <div className="absolute left-3/4 hidden max-sm:block">
                 <ButtonDica/>
                 </div>
               </div>
