@@ -10,6 +10,8 @@ import ajuda from "./imagens/question.png"
 import { useEffect, useState } from "react";
 import Card_phone from "./containers/Card_phone";
 import Cidades from "./containers/Cidades";
+import ButtonDica from "./containers/ButtonDicas";
+import DicaUso from "./containers/Dica_uso";
 
 
 export function App() {
@@ -215,12 +217,12 @@ export function App() {
   
   return (
     <> 
-        <CityApi.Provider value={{ cityApi , setCityApi }}>
-          <CityLocation.Provider value={{ cityLocation , setCityLocation}}>
-            <Cabecalho>
-              <FaSearch />
-            </Cabecalho>
-                    <main>
+      <CityApi.Provider value={{ cityApi , setCityApi }}>
+        <CityLocation.Provider value={{ cityLocation , setCityLocation}}>
+          <Cabecalho>
+            <FaSearch />
+          </Cabecalho>
+          <main>
             <Cidades></Cidades>
             <section className="flex justify-center items-center">
               {((!dadosClima == "")?<Card click={estenderCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , sensacao ,nascerSol , PorSol }}/>:'')}
@@ -232,6 +234,7 @@ export function App() {
                   lat , lon , sensacao , dereVento , nascerSol , umidade , PorSol , veloVento
                 }
               }/>
+              <DicaUso/>
             </section>
             <section className="mt-5 m-auto max-w-5xl">
               <div className="relative flex items-center">
@@ -240,16 +243,19 @@ export function App() {
                     <p>As informações do clima para os próximos dias da semana são falsas. A API utilizada não tem a funcionalidade necessária, mas é um exemplo de como seria mostrado as informações.</p>
                   </div>
                 </div>
-                <h2 className="pl-3">Proximas Semanas: </h2>
+                <h2 className="pl-3 font-semibold">Proximas Semanas: </h2>
                 <img src={ajuda} alt="ajuda" className="cursor-pointer w-5 h-5" onClick={msgInformacao}/>
+                <div className="absolute right-5 hidden max-sm:block">
+                <ButtonDica/>
+                </div>
               </div>
               <div className="div_semana flex justify-around gap-2 p-3 overflow-y-hidden">
                 {semana.map((dia)=><CardSemana key={dia} climaAPI={{imgClima , temp , tempMax , tempMin , dia}}/>)}
               </div>
             </section>
-                    </main>
-          </CityLocation.Provider>
-        </CityApi.Provider>
+          </main>
+        </CityLocation.Provider>
+      </CityApi.Provider>
     </>
   )
 }

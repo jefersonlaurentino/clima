@@ -60,7 +60,7 @@ export default function CardEstendido (props) {
                         <p className="flex items-end mr-5"><img src={celsiusMin} alt="" />{props.climaAPI.tempMin} / {props.climaAPI.tempMax} <img src={celsiusMax} alt="" /></p>
                     </div>
                 </div>
-                <button className="absolute bottom-1 underline" onClick={props.click}>Voltar as informações</button>
+                <button className="absolute bottom-1 underline" onClick={props.click}>Voltar</button>
             </div>
             <div>
                 <div className="absolute w-1/2 h-[95%] p-2 div_info flex flex-col justify-between">
