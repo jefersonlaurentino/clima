@@ -66,7 +66,7 @@ export function App() {
 
   useEffect(() => {
     const suaLocalizacao = navigator.geolocation.watchPosition((localizacao) => {
-      alert("ok")
+      console.log(localizacao)
       apiLocation(localizacao.coords.latitude,localizacao.coords.longitude)
     }, function(erro) {
       console.log(erro);
