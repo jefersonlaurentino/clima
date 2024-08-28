@@ -64,16 +64,19 @@ export function App() {
     setPorSol((`${(porHoras < 10) ? "0"+porHoras: porHoras}:${(porNimutos < 10) ? "0"+porNimutos : porNimutos}`))
   },350)
 
-  let permiçãoLoq = false 
-
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((localizacao) => {
-    apiLocation(localizacao.coords.latitude,localizacao.coords.longitude)
+    const suaLocalizacao = navigator.geolocation.watchPosition((localizacao) => {
+      alert("ok")
+      apiLocation(localizacao.coords.latitude,localizacao.coords.longitude)
     }, function(erro) {
       console.log(erro);
       document.querySelector(".info_city").innerHTML = "Permissão de Localização Bloqueada."
     }, { enableHighAccuracy: true , maximumAge: 30000, timeout: 30000})
+    setTimeout(() => {
+      (navigator.geolocation.clearWatch(suaLocalizacao))
+    }, 6000);
   },[])
+
 
   const apiLocation = (latitude, longitude) =>{
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=46a95d36faa14230ee1af68172883766&lang=pt_br&units=metric`)
