@@ -64,6 +64,8 @@ export function App() {
     setPorSol((`${(porHoras < 10) ? "0"+porHoras: porHoras}:${(porNimutos < 10) ? "0"+porNimutos : porNimutos}`))
   },350)
 
+  let permiçãoLoq = false 
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((localizacao) => {
     apiLocation(localizacao.coords.latitude,localizacao.coords.longitude)
@@ -89,10 +91,11 @@ export function App() {
         document.querySelector(".info_city").innerHTML = "ERRO! Cidade Não Encontrada."
       })
     } else {
+      document.querySelector(".info_city").innerHTML = ""
       return await (
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=sao%20paulo&APPID=46a95d36faa14230ee1af68172883766&lang=pt_br&units=metric`)
-        .then(res => res.json())
-        .catch(err => console.log(err))
+        .then(res =>res.json())  
+        .catch(err =>console.log(err))
       )
     }
   }
@@ -222,7 +225,7 @@ export function App() {
           <Cabecalho>
             <FaSearch />
           </Cabecalho>
-          <main>
+          <main className="relative">
             <Cidades></Cidades>
             <section className="flex justify-center items-center">
               {((!dadosClima == "")?<Card click={estenderCard} climaAPI={{city, pais , imgClima , temp , tempMax , tempMin , clima , lat , lon , veloVento , dereVento , umidade , sensacao ,nascerSol , PorSol }}/>:'')}

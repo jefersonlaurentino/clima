@@ -41,7 +41,7 @@ export default function Cidades() {
     }
     
     return (
-        <section className="cards_city absolute z-10 w-full flex flex-col items-center hidden">
+        <section className="cards_city absolute w-full z-10 flex flex-col items-center hidden">
             <div className="flex flex-col gap-2 backdrop-blur-3xl p-2 rounded-xl shadow-lg">
                 {cidade.map((e)=><Card_cidade key={keyCard(e.lat)} cidade={e}/>)}
             </div>

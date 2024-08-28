@@ -1,5 +1,4 @@
 import { IoCloseSharp } from "react-icons/io5";
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import respostas from "../../../database/dicasAjuda";
 
 export default function Dicas_uso(){
@@ -36,7 +35,7 @@ export default function Dicas_uso(){
                     <h4>Perguntas frequentes</h4>
                 </div>
                 <div className="h-full py-3 overflow-x-hidden">
-                    {respostaDicas.map((e)=><details key={e} className="border rounded-lg my-4 relative overflow-hidden">
+                    {respostaDicas.map((e)=><details key={e.titulo} className="border rounded-lg my-4 relative overflow-hidden">
                         <summary onClick={(evt)=>dicasOpen(evt.target)} className="flex items-center py-1 px-4 after:content-['➤'] after:absolute after:right-3">{e.titulo}</summary>
                         <p className="border-t bg-neutral-100 text-black p-2">{e.mensagem}</p>
                     </details>)}
