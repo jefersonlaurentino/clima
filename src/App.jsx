@@ -65,15 +65,12 @@ export function App() {
   },350)
 
   useEffect(() => {
-    const suaLocalizacao = navigator.geolocation.watchPosition((localizacao) => {
+    navigator.geolocation.getCurrentPosition((localizacao) => {
       apiLocation(localizacao.coords.latitude,localizacao.coords.longitude)
     }, function(erro) {
       console.log(erro);
       document.querySelector(".info_city").innerHTML = "Permissão de Localização Bloqueada."
     }, { enableHighAccuracy: true , maximumAge: 30000, timeout: 30000})
-    setTimeout(() => {
-      (navigator.geolocation.clearWatch(suaLocalizacao))
-    }, 6000);
   },[])
 
 
